@@ -11,13 +11,11 @@ const StockList = () => {
       .then((result) => setProducts(result.data));
   }, []);
 
-  return (
-    <View>
-      {products.map((product, index) => (
-        <Text key={product.id}>{product.name}</Text>
-      ))}
-    </View>
-  );
+  const productNames = products.map((product) => (
+    <Text key={product.id}>{product.name}</Text>
+  ));
+
+  return <View>{productNames}</View>;
 };
 
 const Stock = () => {
