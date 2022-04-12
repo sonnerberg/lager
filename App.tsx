@@ -1,15 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import warehouse from './assets/warehouse.jpg';
-import Stock from './components/Stock';
+import { StatusBar } from "expo-status-bar";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+// import warehouse from "./assets/warehouse.jpg";
+import Stock from "./components/Stock";
+import snes from "./assets/snes.png";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.base}>
-        <Text style={{color: '#33c', fontSize: 42}}>Lager-appen</Text>
-        <Image source={warehouse} style={{width: 320, height: 240}} />
+        <Text style={{ color: "#33c", fontSize: 42 }}>Lager-appen</Text>
+        <Image source={snes} style={{ width: "100%", height: "12%" }} />
         <Stock />
         <StatusBar style="auto" />
       </View>
@@ -23,8 +24,8 @@ const styles = StyleSheet.create({
   },
   base: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     paddingStart: 12,
     paddingEnd: 12,
-  }
+  },
 });
