@@ -8,17 +8,22 @@ import Stock from "./components/Stock";
 import snes from "./assets/snes.png";
 import Pick from "./components/Pick";
 import { Ionicons } from "@expo/vector-icons";
+import OrderList from "./components/OrderList";
+import { useState, useEffect } from "react";
+import productsModel from "./models/products";
 
 const Tab = createBottomTabNavigator();
 
-const Home = () => (
-  <View style={styles.base}>
-    <Text style={{ color: "#33c", fontSize: 42 }}>Lager-appen</Text>
-    <Image source={snes} style={{ width: "100%", height: "12%" }} />
-    <Stock />
-    <StatusBar style="auto" />
-  </View>
-);
+const Home = ({ products }) => {
+  return (
+    <View style={styles.base}>
+      <Text style={{ color: "#33c", fontSize: 42 }}>Lager-appen</Text>
+      <Image source={snes} style={{ width: "100%", height: "12%" }} />
+      <Stock products={products} />
+      <StatusBar style="auto" />
+    </View>
+  );
+};
 
 const routeIcons = {
   Lager: "home",
@@ -26,6 +31,15 @@ const routeIcons = {
 };
 
 export default function App() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setProducts(await productsModel.getProducts());
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <NavigationContainer>
@@ -40,7 +54,9 @@ export default function App() {
             tabBarInactiveTintColor: "gray",
           })}
         >
-          <Tab.Screen name="Lager" component={Home} />
+          <Tab.Screen name="Lager">
+            {() => <Home products={products} />}
+          </Tab.Screen>
           <Tab.Screen name="Plock" component={Pick} />
         </Tab.Navigator>
       </NavigationContainer>
