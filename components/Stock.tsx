@@ -12,7 +12,10 @@ const StockList = () => {
   }, []);
 
   const productNames = products.map((product) => (
-    <Text key={product.id}>{product.name}</Text>
+    <Text key={product.id}>
+      <Text style={{ fontWeight: "bold" }}>{product.name}, </Text>
+      <Text>antal i lager: {product.stock}</Text>
+    </Text>
   ));
 
   return <View>{productNames}</View>;
