@@ -5,7 +5,7 @@ import PickList from "./PickList";
 
 const Stack = createNativeStackNavigator();
 
-export default function Pick({ setProducts }) {
+const Pick = ({ setProducts }) => {
   return (
     <Stack.Navigator initialRouteName="List">
       <Stack.Screen name="List" component={OrderList} />
@@ -20,4 +20,6 @@ export default function Pick({ setProducts }) {
       </Stack.Screen>
     </Stack.Navigator>
   );
-}
+};
+
+export default Pick;
