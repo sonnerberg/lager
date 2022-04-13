@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { View, Text, Button } from "react-native";
 import { api_key, base_url } from "../config/config.json";
+import Order from "../interfaces/Order";
 import orders from "../models/orders";
 
 const OrderList = ({ route, navigation }) => {
@@ -20,8 +21,8 @@ const OrderList = ({ route, navigation }) => {
   }, []);
 
   const listOfOrders = allOrders
-    .filter((order) => order.status === "Ny")
-    .map((order) => (
+    .filter((order: Order) => order.status === "Ny")
+    .map((order: Order) => (
       <Button
         title={order.name}
         key={order.id}
