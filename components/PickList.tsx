@@ -5,6 +5,7 @@ import Product from "../interfaces/Product";
 import OrderItem from "../interfaces/OrderItem";
 import { useEffect } from "react";
 import productsModel from "../models/products";
+import products from "../models/products";
 
 const PickList = ({ route, navigation, setProducts }) => {
   const { order } = route.params;
@@ -17,13 +18,17 @@ const PickList = ({ route, navigation, setProducts }) => {
     return enoughOnHand;
   };
 
-  useEffect(async () => {
-    setProducts(await productsModel.getProducts());
+  const fetchAllProducts = async () => {
+    setProducts(await products.getProducts());
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
   }, []);
 
   const pick = async () => {
     await orderModel.pickOrder(order);
-    setProducts(await productsModel.getProducts());
+    fetchAllProducts();
     navigation.navigate("List", { reload: true });
   };
 
