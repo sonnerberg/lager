@@ -13,7 +13,7 @@ const PickList = ({ route, navigation, setProducts }) => {
   const checkInventory = () => {
     // TODO: Check the inventory for all products in order
     const enoughOnHand = order.order_items.every(
-      (product: Partial<OrderItem>) => product.stock > product.amount
+      (product: Partial<OrderItem>) => product.stock! > product.amount!
     );
     return enoughOnHand;
   };
