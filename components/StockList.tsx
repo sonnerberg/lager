@@ -5,8 +5,12 @@ import productsModel from "../models/products";
 import { Typography } from "../styles";
 
 const StockList = ({ products, setProducts }) => {
-  useEffect(async () => {
+  const fetchAllProducts = async () => {
     setProducts(await productsModel.getProducts());
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
   }, []);
 
   const productNames = products.map((product: Partial<Product>) => (
