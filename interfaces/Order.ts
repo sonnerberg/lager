@@ -4,7 +4,7 @@ export default interface Order {
   id: number;
   name: string;
   address: string;
-  zip: number;
+  zip: string;
   city: string;
   country: string;
   status: "Ny" | "Packad" | "Skickad" | "Fakturerad" | "Retur" | "Återbetald";
