@@ -7,7 +7,7 @@ export default interface Order {
   zip: number;
   city: string;
   country: string;
-  status: string;
-  status_id: number;
+  status: "Ny" | "Packad" | "Skickad" | "Fakturerad" | "Retur" | "Återbetald";
+  status_id: 100 | 200 | 400 | 600 | 800 | 900;
   order_items: Array<OrderItem>;
 }
