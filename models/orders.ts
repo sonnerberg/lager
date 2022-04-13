@@ -1,6 +1,5 @@
 import { api_key, base_url } from "../config/config.json";
 import Order from "../interfaces/Order";
-import OrderItem from "../interfaces/OrderItem";
 import products from "./products";
 
 const orders = {
@@ -12,11 +11,9 @@ const orders = {
   },
   pickOrder: async (order: Partial<Order>) => {
     const { id, name } = order;
-    // TODO: Reduce the stock for each item ordered
     order.order_items?.forEach((item) => {
       products.updateProduct(item);
     });
-    // TODO: Change status_id of order
     await fetch(`${base_url}/orders`, {
       method: "PUT",
       headers: {
@@ -30,9 +27,6 @@ const orders = {
         status: "Packad",
       }),
     });
-
-    // const result = await response.json();
-    // console.log("the result is", result);
   },
 };
 
