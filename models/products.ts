@@ -20,7 +20,7 @@ const products = {
         id,
         name,
         api_key,
-        stock: stock - amount,
+        stock: stock! - amount!,
       }),
     });
   },
