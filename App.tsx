@@ -11,15 +11,16 @@ import { Ionicons } from "@expo/vector-icons";
 import OrderList from "./components/OrderList";
 import { useState, useEffect } from "react";
 import productsModel from "./models/products";
+import { Base, Typography } from "./styles/index";
 
 const Tab = createBottomTabNavigator();
 
-const Home = ({ products }) => {
+const Home = ({ products, setProducts }) => {
   return (
     <View style={styles.base}>
       <Text style={{ color: "#33c", fontSize: 42 }}>Lager-appen</Text>
       <Image source={snes} style={{ width: "100%", height: "12%" }} />
-      <Stock products={products} />
+      <Stock products={products} setProducts={setProducts} />
       <StatusBar style="auto" />
     </View>
   );
@@ -55,9 +56,11 @@ export default function App() {
           })}
         >
           <Tab.Screen name="Lager">
-            {() => <Home products={products} />}
+            {() => <Home products={products} setProducts={setProducts} />}
           </Tab.Screen>
-          <Tab.Screen name="Plock" component={Pick} />
+          <Tab.Screen name="Plock">
+            {() => <Pick setProducts={setProducts} />}
+          </Tab.Screen>
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaView>

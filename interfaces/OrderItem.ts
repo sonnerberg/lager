@@ -1,11 +1,13 @@
 export default interface OrderItem {
-  id: number;
-  article_number: string;
-  name: string;
-  description: string;
-  specifiers: object;
-  stock: number;
-  location: string;
-  price: number;
+  order_id: string;
+  product_id: string;
+  amount: number;
   api_key: string;
+  stock: number;
+  article_number: string;
+  description: string;
+  location: string;
+  name: string;
+  price: string;
+  specifiers: object;
 }
