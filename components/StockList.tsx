@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Text, View } from "react-native";
 import Product from "../interfaces/Product";
 import productsModel from "../models/products";
+import { Typography } from "../styles";
 
 const StockList = ({ products, setProducts }) => {
   useEffect(async () => {
@@ -9,8 +10,8 @@ const StockList = ({ products, setProducts }) => {
   }, []);
 
   const productNames = products.map((product: Partial<Product>) => (
-    <Text key={product.id}>
-      <Text style={{ fontWeight: "bold" }}>{product.name}, </Text>
+    <Text key={product.id} style={Typography.padding}>
+      <Text style={Typography.boldText}>{product.name}, </Text>
       <Text>antal i lager: {product.stock}</Text>
     </Text>
   ));

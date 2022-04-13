@@ -12,14 +12,15 @@ import OrderList from "./components/OrderList";
 import { useState, useEffect } from "react";
 import productsModel from "./models/products";
 import { Base, Typography } from "./styles/index";
+import { base } from "./styles/Base";
 
 const Tab = createBottomTabNavigator();
 
 const Home = ({ products, setProducts }) => {
   return (
-    <View style={styles.base}>
-      <Text style={{ color: "#33c", fontSize: 42 }}>Lager-appen</Text>
-      <Image source={snes} style={{ width: "100%", height: "12%" }} />
+    <View style={Base.base}>
+      <Text style={Typography.header1}>Lager-appen</Text>
+      <Image source={snes} style={Base.homePageImage} />
       <Stock products={products} setProducts={setProducts} />
       <StatusBar style="auto" />
     </View>
@@ -42,7 +43,7 @@ export default function App() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={Base.container}>
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
