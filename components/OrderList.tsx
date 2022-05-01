@@ -13,7 +13,9 @@ const OrderList = ({ route, navigation }) => {
   };
 
   if (reload) {
+    console.log("reloading orders");
     fetchAllOrders();
+    route.params.reload = false;
   }
 
   useEffect(() => {

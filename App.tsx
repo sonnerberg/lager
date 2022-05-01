@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import productsModel from "./models/products";
 import { Base } from "./styles/index";
 import Home from "./components/Home";
+import Deliveries from "./components/Deliveries";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,11 +22,12 @@ const routeIcons = {
 export default function App() {
   const [products, setProducts] = useState([]);
 
+  const fetchAllProducts = async () => {
+    setProducts(await productsModel.getProducts());
+  };
+
   useEffect(() => {
-    const fetchProducts = async () => {
-      setProducts(await productsModel.getProducts());
-    };
-    fetchProducts();
+    fetchAllProducts();
   }, []);
 
   return (
@@ -47,6 +49,9 @@ export default function App() {
           </Tab.Screen>
           <Tab.Screen name="Plock">
             {() => <Pick setProducts={setProducts} />}
+          </Tab.Screen>
+          <Tab.Screen name="Inleveranser">
+            {() => <Deliveries setProducts={setProducts} />}
           </Tab.Screen>
         </Tab.Navigator>
       </NavigationContainer>

@@ -28,3 +28,7 @@ export const boldText = {
 export const padding = {
   padding: 20,
 };
+
+export const label = {
+  padding: 5,
+};

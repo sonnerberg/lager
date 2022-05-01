@@ -9,20 +9,45 @@ const products = {
 
     return result.data;
   },
+  addToStock: async (product: Partial<Product>) => {
+    let result;
+    try {
+      const { id, name, stock } = product;
+      result = await fetch(`${base_url}/products`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          name,
+          api_key,
+          stock,
+        }),
+      });
+    } catch (error) {
+      console.error("the error for adding to stock is", error);
+    }
+  },
   updateProduct: async (product: Partial<OrderItem>) => {
-    const { product_id: id, name, stock, amount } = product;
-    await fetch(`${base_url}/products`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        id,
-        name,
-        api_key,
-        stock: stock! - amount!,
-      }),
-    });
+    let result;
+    try {
+      const { product_id: id, name, stock, amount } = product;
+      result = await fetch(`${base_url}/products`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          name,
+          api_key,
+          stock: amount ? stock! - amount : stock,
+        }),
+      });
+    } catch (error) {
+      console.error("the error for updating product is", error);
+    }
   },
 };
 

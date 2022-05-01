@@ -6,6 +6,6 @@ export default interface Product {
   specifiers: object;
   stock: number;
   location: string;
-  price: number;
+  price: string;
   api_key: string;
 }
