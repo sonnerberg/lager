@@ -3,7 +3,9 @@ import { Button, Platform, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 const DateDropDown = ({ setDelivery, delivery }) => {
-  const [dropDownDate, setDropDownDate] = useState<Date>(new Date());
+  const [dropDownDate, setDropDownDate] = useState<Date | undefined>(
+    new Date()
+  );
   const [show, setShow] = useState<Boolean>(false);
 
   const showDatePicker = () => {
@@ -18,18 +20,15 @@ const DateDropDown = ({ setDelivery, delivery }) => {
       {(show || Platform.OS === "ios") && (
         <DateTimePicker
           onChange={(_, date: Date | undefined) => {
-            if (date) {
-              setDropDownDate(date);
-
-              setDelivery({
-                ...delivery,
-                delivery_date: date.toLocaleDateString("se"),
-              });
-            }
-
             setShow(false);
+            setDropDownDate(date);
+
+            setDelivery({
+              ...delivery,
+              delivery_date: date?.toLocaleDateString("se"),
+            });
           }}
-          value={dropDownDate}
+          value={dropDownDate ? dropDownDate : new Date()}
         />
       )}
     </View>
