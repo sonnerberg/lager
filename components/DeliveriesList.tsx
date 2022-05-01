@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, Button } from "react-native";
+import { Text, View, Button, ScrollView } from "react-native";
 import deliveriesModel from "../models/deliveries";
 import productsModel from "../models/products";
 import { Base, Typography } from "../styles";
@@ -37,7 +37,7 @@ const DeliveriesList = ({ route, navigation, setProducts }) => {
   ));
 
   return (
-    <View style={Base.base}>
+    <ScrollView style={Base.base}>
       <Text style={Typography.header2}>Inleveranser</Text>
       {listOfDeliveries.length > 0 ? (
         listOfDeliveries
@@ -50,7 +50,7 @@ const DeliveriesList = ({ route, navigation, setProducts }) => {
           navigation.navigate("Form");
         }}
       />
-    </View>
+    </ScrollView>
   );
 };
 
