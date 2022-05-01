@@ -42,7 +42,8 @@ const DeliveryForm = ({ route, navigation }) => {
         setCurrentProduct={setCurrentProduct}
       />
 
-      <Text style={{ ...Typography.label }}>Produkt</Text>
+      <Text style={{ ...Typography.label }}>Datum</Text>
+      <Text style={{ ...Typography.label }}>{delivery.delivery_date}</Text>
       <DateDropDown delivery={delivery} setDelivery={setDelivery} />
 
       <Text style={{ ...Typography.label }}>Antal</Text>
