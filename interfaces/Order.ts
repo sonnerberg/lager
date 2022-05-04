@@ -1,6 +1,6 @@
 import OrderItem from "./OrderItem";
 
-export default interface Order {
+interface Order {
   id: number;
   name: string;
   address: string;
@@ -11,3 +11,5 @@ export default interface Order {
   status_id: 100 | 200 | 400 | 600 | 800 | 900;
   order_items: Array<OrderItem>;
 }
+
+export default Order;

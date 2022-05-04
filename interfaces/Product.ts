@@ -1,4 +1,4 @@
-export default interface Product {
+interface Product {
   id: number;
   article_number: string;
   name: string;
@@ -9,3 +9,5 @@ export default interface Product {
   price: string;
   api_key: string;
 }
+
+export default Product;

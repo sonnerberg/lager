@@ -1,4 +1,4 @@
-export default interface OrderItem {
+interface OrderItem {
   order_id: string;
   product_id: string;
   amount: number;
@@ -11,3 +11,5 @@ export default interface OrderItem {
   price: string;
   specifiers: object;
 }
+
+export default OrderItem;

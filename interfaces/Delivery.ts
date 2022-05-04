@@ -1,4 +1,4 @@
-export default interface Delivery {
+interface Delivery {
   id: number;
   product_id: number;
   product_name: string;
@@ -7,3 +7,5 @@ export default interface Delivery {
   comment: string;
   api_key: string;
 }
+
+export default Delivery;
