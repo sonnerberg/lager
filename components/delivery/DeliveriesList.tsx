@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, Button, ScrollView } from "react-native";
-import deliveriesModel from "../models/deliveries";
-import productsModel from "../models/products";
-import { Base, Typography } from "../styles";
-import Delivery from "../interfaces/Delivery";
+import deliveriesModel from "../../models/deliveries";
+import productsModel from "../../models/products";
+import { Base, Typography } from "../../styles";
+import Delivery from "../../interfaces/Delivery";
 
 const DeliveriesList = ({ route, navigation, setProducts }) => {
   const { reload } = route.params || false;

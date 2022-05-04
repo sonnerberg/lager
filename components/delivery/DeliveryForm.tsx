@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Text, Button, ScrollView, TextInput } from "react-native";
-import Delivery from "../interfaces/Delivery";
-import deliveryModel from "../models/deliveries";
-import productModel from "../models/products";
-import { Base, Forms, Typography } from "../styles";
-import Product from "../interfaces/Product";
+import Delivery from "../../interfaces/Delivery";
+import deliveryModel from "../../models/deliveries";
+import productModel from "../../models/products";
+import { Base, Forms, Typography } from "../../styles";
+import Product from "../../interfaces/Product";
 import ProductDropDown from "./ProductDropDown";
 import DateDropDown from "./DateDropDown";
 

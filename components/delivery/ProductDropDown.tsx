@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import productModel from "../models/products";
+import productModel from "../../models/products";
 import { Picker } from "@react-native-picker/picker";
-import Product from "../interfaces/Product";
+import Product from "../../interfaces/Product";
 
 const ProductDropDown = (props) => {
   const [products, setProducts] = useState<Product[]>([]);
