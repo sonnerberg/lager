@@ -1,0 +1,27 @@
+import { useState } from "react";
+import Auth from "../../interfaces/Auth";
+import AuthFields from "./AuthFields";
+import AuthModel from "../../models/auth";
+
+const Register = ({ navigation }) => {
+  const [auth, setAuth] = useState<Partial<Auth>>({});
+
+  const doRegister = async () => {
+    if (auth.email && auth.password) {
+      const result = await AuthModel.register(auth.email, auth.password);
+      // TODO: Show message to user if successful / unsuccessful
+      navigation.navigate("Login");
+    }
+  };
+  return (
+    <AuthFields
+      auth={auth}
+      setAuth={setAuth}
+      submit={doRegister}
+      navigation={navigation}
+      title="Registera"
+    />
+  );
+};
+
+export default Register;
