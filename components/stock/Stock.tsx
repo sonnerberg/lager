@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import { api_key, base_url } from "../config/config.json";
-import Product from "../interfaces/Product";
-import { Typography } from "../styles";
+import { api_key, base_url } from "../../config/config.json";
+import Product from "../../interfaces/Product";
+import { Typography } from "../../styles";
 import StockList from "./StockList";
 
 const Stock = ({ products, setProducts }) => {

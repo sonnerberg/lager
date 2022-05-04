@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { Image, Text, View } from "react-native";
-import Stock from "./Stock";
+import Stock from "./stock/Stock";
 import snes from "../assets/snes.png";
 import { Base, Typography } from "../styles/index";
 

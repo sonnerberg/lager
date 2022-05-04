@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Text, View } from "react-native";
-import Product from "../interfaces/Product";
-import productsModel from "../models/products";
-import { Typography } from "../styles";
+import Product from "../../interfaces/Product";
+import productsModel from "../../models/products";
+import { Typography } from "../../styles";
 
 const StockList = ({ products, setProducts }) => {
   const fetchAllProducts = async () => {
