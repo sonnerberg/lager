@@ -11,15 +11,15 @@ const auth = {
 
     return token && notExpired;
   },
-  // TODO: change email/password to auth interface object
-  login: async (email: string, password: string) => {
+  login: async (authFields: Auth) => {
     const data = {
       api_key,
-      email,
-      password,
+      email: authFields.email,
+      password: authFields.password,
     };
-    // TODO: Destructure token and message
-    const result = await (
+    const {
+      data: { token, message },
+    } = await (
       await fetch(`${base_url}/auth/login`, {
         method: "POST",
         body: JSON.stringify(data),
@@ -27,17 +27,17 @@ const auth = {
       })
     ).json();
 
-    await storage.storeToken(result.data.token);
+    await storage.storeToken(token);
 
-    return result.data.message;
+    return message;
   },
-  // TODO: change email/password to auth interface object
-  register: async (email: string, password: string) => {
+  register: async (authFields: Auth) => {
     const data = {
       api_key,
-      email,
-      password,
+      email: authFields.email,
+      password: authFields.password,
     };
+
     const result = await (
       await fetch(`${base_url}/auth/register`, {
         method: "POST",

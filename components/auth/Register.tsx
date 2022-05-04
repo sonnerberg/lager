@@ -8,7 +8,10 @@ const Register = ({ navigation }) => {
 
   const doRegister = async () => {
     if (auth.email && auth.password) {
-      const result = await AuthModel.register(auth.email, auth.password);
+      const result = await AuthModel.register({
+        email: auth.email,
+        password: auth.password,
+      });
       // TODO: Show message to user if successful / unsuccessful
       navigation.navigate("Login");
     }

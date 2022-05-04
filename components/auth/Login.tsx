@@ -8,8 +8,12 @@ const Login = ({ route, navigation, setIsLoggedIn }) => {
 
   const doLogin = async () => {
     if (auth.email && auth.password) {
-      const result = await AuthModel.login(auth.email, auth.password);
+      await AuthModel.login({
+        email: auth.email,
+        password: auth.password,
+      });
 
+      // TODO: Show message to user if successful / unsuccessful
       setIsLoggedIn(true);
     }
   };

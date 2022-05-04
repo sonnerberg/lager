@@ -7,26 +7,23 @@ const AuthFields = ({ auth, setAuth, title, submit, navigation }) => {
       <Text style={Typography.header2}>{title}</Text>
       <Text style={Typography.label}>E-post</Text>
       <TextInput
-        // TODO: change content to email as a test
         style={Forms.input}
-        onChangeText={(content: string) => {
-          setAuth({ ...auth, email: content });
+        onChangeText={(email: string) => {
+          setAuth({ ...auth, email });
         }}
         value={auth?.email}
         keyboardType="email-address"
       />
       <Text style={Typography.label}>Lösenord</Text>
-      {/*  TODO: change content to password as a test */}
       <TextInput
         style={Forms.input}
-        onChangeText={(content: string) => {
-          setAuth({ ...auth, password: content });
+        onChangeText={(password: string) => {
+          setAuth({ ...auth, password });
         }}
         value={auth?.password}
         secureTextEntry={true}
       />
       <Button title={title} onPress={submit} />
-      {/*  TODO: Create interface for title (Logga in / registera) */}
       {title === "Logga in" && (
         <Button
           title="Registrera i stället"
