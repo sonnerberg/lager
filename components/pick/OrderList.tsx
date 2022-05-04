@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { View, Text, Button } from "react-native";
-import { api_key, base_url } from "../config/config.json";
-import Order from "../interfaces/Order";
-import orders from "../models/orders";
+import { api_key, base_url } from "../../config/config.json";
+import Order from "../../interfaces/Order";
+import orders from "../../models/orders";
 
 const OrderList = ({ route, navigation }) => {
   const { reload } = route.params || false;

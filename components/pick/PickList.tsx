@@ -1,8 +1,8 @@
 import { View, Text, Button } from "react-native";
-import orderModel from "../models/orders";
-import OrderItem from "../interfaces/OrderItem";
+import orderModel from "../../models/orders";
+import OrderItem from "../../interfaces/OrderItem";
 import { useEffect } from "react";
-import products from "../models/products";
+import products from "../../models/products";
 
 const PickList = ({ route, navigation, setProducts }) => {
   const { order } = route.params;
