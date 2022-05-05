@@ -87,15 +87,3 @@ export default function App() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  base: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingStart: 12,
-    paddingEnd: 12,
-  },
-});
