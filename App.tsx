@@ -12,7 +12,7 @@ import Home from "./components/Home";
 import Deliveries from "./components/delivery/Deliveries";
 import Auth from "./components/auth/Auth";
 import { Button } from "react-native-paper";
-import { ListAccordionGroupContext } from "react-native-paper/lib/typescript/components/List/ListAccordionGroup";
+import Invoices from "./components/invoice/Invoices";
 
 const Tab = createBottomTabNavigator();
 
@@ -76,7 +76,7 @@ export default function App() {
             {() => <Deliveries setProducts={setProducts} />}
           </Tab.Screen>
           {isLoggedIn ? (
-            <Tab.Screen name="Faktura" component={Pick} />
+            <Tab.Screen name="Faktura" component={Invoices} />
           ) : (
             <Tab.Screen name="Logga in">
               {() => <Auth setIsLoggedIn={setIsLoggedIn} />}

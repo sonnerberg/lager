@@ -4,12 +4,25 @@ import Auth from "../interfaces/Auth";
 import storage from "./storage";
 
 const auth = {
-  loggedIn: async () => {
-    const token = await storage.readToken();
+  getToken: async () => {
+    const { token, date } = await storage.readToken();
     const twentyFourHours = 1000 * 60 * 60 * 24;
-    const notExpired = new Date().getTime() - token.date < twentyFourHours;
+    const notExpired = new Date().getTime() - date < twentyFourHours;
 
-    return token && notExpired;
+    if (token && notExpired) {
+      return token;
+    }
+  },
+  loggedIn: async () => {
+    try {
+      const token = await storage.readToken();
+      const twentyFourHours = 1000 * 60 * 60 * 24;
+      const notExpired = new Date().getTime() - token.date < twentyFourHours;
+
+      return token && notExpired;
+    } catch (error) {
+      console.error("user is not logged in", error);
+    }
   },
   login: async (authFields: Auth) => {
     const data = {
