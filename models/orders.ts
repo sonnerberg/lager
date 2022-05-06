@@ -9,6 +9,19 @@ const orders = {
 
     return result.data;
   },
+  changeOrderToInvoiced: async (order: Partial<Order>) => {
+    console.log("the order", order);
+    await fetch(`${base_url}/orders`, {
+      method: "PUT",
+      body: JSON.stringify({
+        api_key,
+        id: order.id,
+        name: order.name,
+        status_id: order.status_id,
+      }),
+      headers: { "content-type": "application/json" },
+    });
+  },
   getOrder: async (orderId: number): Promise<Order> => {
     const response = await fetch(
       `${base_url}/orders/${orderId}?api_key=${api_key}`

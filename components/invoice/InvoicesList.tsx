@@ -32,25 +32,6 @@ const InvoicesList = ({ route, navigation }) => {
       </DataTable.Row>
     );
   });
-  // const listOfInvoices = invoices.map((invoice) => (
-  //   <Text key={invoice.id} style={Typography.padding}>
-  //     <Text style={Typography.boldText}>{invoice.id},</Text>
-  //     <Text> levererade: {invoice.total_price}</Text>
-  //     <Text> kommentar: {invoice.due_date}</Text>
-  //     <Text> kommentar: {invoice.name}</Text>
-  //   </Text>
-  // ));
-
-  // return (
-  //   <DataTable>
-  //     <DataTable.Header>
-  //       <DataTable.Title>Animal</DataTable.Title>
-  //       <DataTable.Title numeric># of legs</DataTable.Title>
-  //       <DataTable.Title>Color</DataTable.Title>
-  //     </DataTable.Header>
-  //     {table}
-  //   </DataTable>
-  // );
   return (
     <ScrollView style={Base.base}>
       <Text style={Typography.header2}>Fakturor</Text>

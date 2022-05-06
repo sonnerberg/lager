@@ -5,12 +5,14 @@ import Product from "../../interfaces/Product";
 import ordersModel from "../../models/orders";
 import Order from "../../interfaces/Order";
 
-const OrderDropDown = ({ invoice, setInvoice, setCurrentInvoice }) => {
+const OrderDropDown = ({ invoice, setInvoice, setCurrentOrder }) => {
   const [orders, setOrders] = useState<Order[]>([]);
   let orderHash: any = {};
 
   const fetchAllOrders = async () => {
-    setOrders(await ordersModel.getOrders());
+    const orders = await ordersModel.getOrders();
+    const nonInvoicedOrders = orders.filter((order) => order.status_id !== 600);
+    setOrders(nonInvoicedOrders);
   };
 
   useEffect(() => {
@@ -27,7 +29,7 @@ const OrderDropDown = ({ invoice, setInvoice, setCurrentInvoice }) => {
       selectedValue={invoice?.order_id}
       onValueChange={(itemValue) => {
         setInvoice({ ...invoice, order_id: itemValue });
-        setCurrentInvoice(orderHash[itemValue]);
+        setCurrentOrder(orderHash[itemValue]);
       }}
     >
       {itemsList}
