@@ -37,14 +37,10 @@ const InvoiceForm = ({ route, navigation }) => {
   };
 
   useEffect(async () => {
-    // TODO: Get totalprice for order
     const order = await fetchAnOrder(invoice?.order_id);
     const totalPrice = calculateTotalPrice(order);
     setTotalPrice(totalPrice);
-    // }, [invoice]);
   }, [invoice]);
-
-  // console.log(invoice);
 
   const addInvoice = async () => {
     try {
@@ -59,14 +55,11 @@ const InvoiceForm = ({ route, navigation }) => {
         status_id: 600,
       };
 
-      // TODO: Add the invoice
       await invoicesModel.addInvoice(updatedInvoice);
 
-      // TODO: Change order status to "Fakturerad"
       const result = await ordersModel.changeOrderToInvoiced(updatedOrder);
       console.log(result);
 
-      // TODO: navigate to invoices
       navigation.navigate("ListOfInvoices", { reload: true });
     } catch (error) {
       console.error("cannot create invoice", error);

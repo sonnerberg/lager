@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Platform, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
