@@ -13,18 +13,16 @@ const InvoiceForm = ({ route, navigation }) => {
   const [currentInvoice, setCurrentInvoice] = useState<Partial<Invoice>>({});
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  const fetchAnOrder = async (order_id): Promise<Partial<Order>> => {
+  const fetchAnOrder = async (order_id: number): Promise<Partial<Order>> => {
     const order = await ordersModel.getOrder(order_id);
-    console.log("the order is", order);
     return order;
   };
 
-  const calculateTotalPrice = (order): number => {
+  const calculateTotalPrice = (order: Order) => {
     try {
       let sum = 0;
       order.order_items.forEach((item) => {
-        console.log(item);
-        sum += item.price;
+        sum += parseInt(item.price) * item.amount;
       });
       return sum;
     } catch (error) {
@@ -32,15 +30,13 @@ const InvoiceForm = ({ route, navigation }) => {
     }
   };
 
-  console.log(currentInvoice);
-
-  // useEffect(() => {
-  //   // TODO: Get totalprice for order
-  //   const order = fetchAnOrder(invoice?.order_id);
-  //   // const totalPrice = calculateTotalPrice(order);
-  //   // console.log("totalprice", totalPrice);
-  //   // }, [invoice]);
-  // }, [invoice]);
+  useEffect(async () => {
+    // TODO: Get totalprice for order
+    const order = await fetchAnOrder(invoice?.order_id);
+    const totalPrice = calculateTotalPrice(order);
+    setTotalPrice(totalPrice);
+    // }, [invoice]);
+  }, [invoice]);
 
   // console.log(invoice);
 
@@ -72,30 +68,30 @@ const InvoiceForm = ({ route, navigation }) => {
         setCurrentInvoice={setCurrentInvoice}
       />
 
-      {/* <Text style={{ ...Typography.label }}>Datum</Text>
-      <Text style={{ ...Typography.label }}>{delivery.delivery_date}</Text>
-      <DateDropDown delivery={delivery} setDelivery={setDelivery} />
+      <Text style={{ ...Typography.label }}>Totalpris</Text>
+      <Text style={{ ...Typography.label }}>{totalPrice}</Text>
+      {/* <DateDropDown delivery={delivery} setDelivery={setDelivery} /> */}
 
-      <Text style={{ ...Typography.label }}>Antal</Text>
-      <TextInput
+      {/* <Text style={{ ...Typography.label }}>Antal</Text> */}
+      {/* <TextInput
         style={{ ...Forms.input }}
         onChangeText={(content: string) => {
           setDelivery({ ...delivery, amount: parseInt(content) });
         }}
         value={delivery?.amount?.toString()}
         keyboardType="phone-pad"
-      />
+      /> */}
 
-      <Text style={{ ...Typography.label }}>Kommentar</Text>
-      <TextInput
+      {/* <Text style={{ ...Typography.label }}>Kommentar</Text> */}
+      {/* <TextInput
         style={{ ...Forms.input }}
         onChangeText={(content: string) => {
           setDelivery({ ...delivery, comment: content });
         }}
         value={delivery?.comment}
-      />
+      /> */}
 
-      <Button title="Gör inleverans" onPress={addDelivery} /> */}
+      {/* <Button title="Gör inleverans" onPress={addDelivery} /> */}
     </ScrollView>
   );
 };
