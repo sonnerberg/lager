@@ -25,8 +25,8 @@ const InvoiceForm = ({ route, navigation }) => {
     try {
       let sum = 0;
 
-      if (order.order_items) {
-        order.order_items.forEach((item) => {
+      if (order && order.order_items) {
+        order?.order_items.forEach((item) => {
           sum += parseInt(item.price) * item.amount;
         });
       }
