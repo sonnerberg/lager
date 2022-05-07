@@ -19,6 +19,9 @@ const Tab = createBottomTabNavigator();
 const routeIcons = {
   Lager: "home",
   Plock: "list",
+  Inleveranser: "car",
+  "Logga in": "person-circle",
+  Faktura: "document-text",
 };
 
 export default function App() {
@@ -62,7 +65,7 @@ export default function App() {
 
               return <Ionicons name={iconName} size={size} color={color} />;
             },
-            tabBarActiveTintColor: "tomato",
+            tabBarActiveTintColor: "cornflowerblue",
             tabBarInactiveTintColor: "gray",
           })}
         >
