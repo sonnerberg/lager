@@ -14,7 +14,11 @@ const Auth = ({ setIsLoggedIn }: Props) => {
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen name="Login">
         {(screenProps) => (
-          <Login {...screenProps} setIsLoggedIn={setIsLoggedIn} />
+          <Login
+            route={screenProps.route}
+            navigation={screenProps.navigation}
+            setIsLoggedIn={setIsLoggedIn}
+          />
         )}
       </Stack.Screen>
       <Stack.Screen name="Register" component={Register} />

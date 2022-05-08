@@ -2,13 +2,15 @@ import { useState } from "react";
 import Auth from "../../interfaces/Auth";
 import AuthFields from "./AuthFields";
 import AuthModel from "../../models/auth";
+import { ParamListBase, RouteProp } from "@react-navigation/native";
 
 interface Props {
-  route: {
-    key: string;
-    name: string;
-    params: { reload: Boolean };
-  };
+  // route: {
+  //   key: string;
+  //   name: string;
+  //   params: { reload: Boolean };
+  // };
+  route: RouteProp<ParamListBase, "Login">;
   navigation: { navigate: Function };
   setIsLoggedIn: React.Dispatch<React.SetStateAction<Boolean>>;
 }
