@@ -5,6 +5,7 @@ import { Text } from "react-native-paper";
 import Order from "../../interfaces/Order";
 import nominatim from "../../models/nominatim";
 import { Base, Typography } from "../../styles";
+import * as Location from "expo-location";
 
 interface Props {
   route: { params: { order: Partial<Order> } };
@@ -14,12 +15,37 @@ const ShipOrder = ({ route }: Props) => {
   //   console.log(route);
   const { order } = route.params || false;
   const [marker, setMarker] = useState<ReactElement>();
-
-  let results;
+  const [userLocationMarker, setUserLocationMarker] = useState<ReactElement>();
+  const [locationMarker, setLocationMarker] = useState(null);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
     (async () => {
-      results = await nominatim.getCoordinates({
+      const { status } = await Location.requestForegroundPermissionsAsync();
+
+      if (status !== "granted") {
+        setErrorMessage("Permission to access location was denied");
+        return;
+      }
+
+      const currentLocation = await Location.getCurrentPositionAsync({});
+
+      setUserLocationMarker(
+        <Marker
+          coordinate={{
+            latitude: currentLocation.coords.latitude,
+            longitude: currentLocation.coords.longitude,
+          }}
+          title="Min plats"
+          pinColor="blue"
+        />
+      );
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const results = await nominatim.getCoordinates({
         street: order.address,
         city: order.city,
       });
@@ -39,6 +65,7 @@ const ShipOrder = ({ route }: Props) => {
   return (
     <View style={Base.base}>
       <Text style={Typography.header2}>Skicka order</Text>
+      {errorMessage ? <Text>{errorMessage}</Text> : null}
       <View style={styles.container}>
         <MapView
           style={styles.map}
@@ -50,6 +77,7 @@ const ShipOrder = ({ route }: Props) => {
           }}
         >
           {marker}
+          {userLocationMarker}
         </MapView>
       </View>
     </View>
