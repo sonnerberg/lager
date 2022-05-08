@@ -3,7 +3,17 @@ import Auth from "../../interfaces/Auth";
 import AuthFields from "./AuthFields";
 import AuthModel from "../../models/auth";
 
-const Login = ({ route, navigation, setIsLoggedIn }) => {
+interface Props {
+  route: {
+    key: string;
+    name: string;
+    params: { reload: Boolean };
+  };
+  navigation: { navigate: Function };
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<Boolean>>;
+}
+
+const Login = ({ route, navigation, setIsLoggedIn }: Props) => {
   const [auth, setAuth] = useState<Partial<Auth>>({});
 
   const doLogin = async () => {

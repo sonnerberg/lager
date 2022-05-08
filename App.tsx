@@ -14,6 +14,7 @@ import Auth from "./components/auth/Auth";
 import { Button } from "react-native-paper";
 import Invoices from "./components/invoice/Invoices";
 import ShipOrder from "./components/ship/ShipOrder";
+import Product from "./interfaces/Product";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +28,7 @@ const routeIcons = {
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   const fetchAllProducts = async () => {
     setProducts(await productsModel.getProducts());

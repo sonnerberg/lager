@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import { Button, Platform, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import Invoice from "../../interfaces/Invoice";
 
-const DateSelectorDueDate = ({ setInvoice, invoice }) => {
+interface Props {
+  invoice: Partial<Invoice>;
+  setInvoice: React.Dispatch<React.SetStateAction<Partial<Invoice>>>;
+}
+
+const DateSelectorDueDate = ({ setInvoice, invoice }: Props) => {
   const [dropDownDate, setDropDownDate] = useState<Date | undefined>(
     new Date()
   );

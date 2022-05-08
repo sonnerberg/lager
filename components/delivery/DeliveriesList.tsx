@@ -4,10 +4,21 @@ import deliveriesModel from "../../models/deliveries";
 import productsModel from "../../models/products";
 import { Base, Typography } from "../../styles";
 import Delivery from "../../interfaces/Delivery";
+import Product from "../../interfaces/Product";
 
-const DeliveriesList = ({ route, navigation, setProducts }) => {
+interface Props {
+  route: {
+    key: string;
+    name: string;
+    params: { reload: Boolean };
+  };
+  navigation: { navigate: Function };
+  setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+}
+
+const DeliveriesList = ({ route, navigation, setProducts }: Props) => {
   const { reload } = route.params || false;
-  const [deliveries, setDeliveries] = useState([]);
+  const [deliveries, setDeliveries] = useState<Delivery[]>([]);
   const fetchAllDeliveries = async () => {
     setDeliveries(await deliveriesModel.getDeliveries());
   };

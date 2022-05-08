@@ -5,7 +5,16 @@ import Invoice from "../../interfaces/Invoice";
 import invoicesModel from "../../models/invoices";
 import { DataTable } from "react-native-paper";
 
-const InvoicesList = ({ route, navigation }) => {
+interface Props {
+  route: {
+    key: string;
+    name: string;
+    params: { reload: Boolean };
+  };
+  navigation: { navigate: Function };
+}
+
+const InvoicesList = ({ route, navigation }: Props) => {
   const { reload } = route.params || false;
   const [invoices, setInvoices] = useState<Array<Partial<Invoice>>>([]);
 

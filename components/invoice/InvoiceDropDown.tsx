@@ -4,8 +4,15 @@ import { Picker } from "@react-native-picker/picker";
 import Product from "../../interfaces/Product";
 import ordersModel from "../../models/orders";
 import Order from "../../interfaces/Order";
+import Invoice from "../../interfaces/Invoice";
 
-const OrderDropDown = ({ invoice, setInvoice, setCurrentOrder }) => {
+interface Props {
+  invoice: Partial<Invoice>;
+  setInvoice: React.Dispatch<React.SetStateAction<Partial<Invoice>>>;
+  setCurrentOrder: React.Dispatch<React.SetStateAction<Partial<Invoice>>>;
+}
+
+const OrderDropDown = ({ invoice, setInvoice, setCurrentOrder }: Props) => {
   const [orders, setOrders] = useState<Order[]>([]);
   let orderHash: any = {};
 

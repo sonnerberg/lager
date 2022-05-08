@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
 import { View, Text, Button } from "react-native";
-import { api_key, base_url } from "../../config/config.json";
 import Order from "../../interfaces/Order";
 import orders from "../../models/orders";
 
-const OrderList = ({ route, navigation }) => {
+interface Props {
+  route: {
+    key: string;
+    name: string;
+    params: { reload: Boolean };
+  };
+  navigation: { navigate: Function };
+}
+
+const OrderList = ({ route, navigation: { navigate } }: Props) => {
   const { reload } = route.params || false;
-  const [allOrders, setAllOrders] = useState([]);
+  const [allOrders, setAllOrders] = useState<Order[]>([]);
 
   const fetchAllOrders = async () => {
     setAllOrders(await orders.getOrders());
@@ -23,13 +31,13 @@ const OrderList = ({ route, navigation }) => {
   }, []);
 
   const listOfOrders = allOrders
-    .filter((order: Order) => order.status === "Ny")
+    .filter((order: Order) => order.status_id === 100)
     .map((order: Order) => (
       <Button
         title={order.name}
         key={order.id}
         onPress={() => {
-          navigation.navigate("Details", {
+          navigate("Details", {
             order,
           });
         }}

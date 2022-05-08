@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { Button, Platform, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import Delivery from "../../interfaces/Delivery";
 
-const DateDropDown = ({ setDelivery, delivery }) => {
+interface Props {
+  delivery: Partial<Delivery>;
+  setDelivery: React.Dispatch<React.SetStateAction<Partial<Delivery>>>;
+}
+const DateDropDown = ({ setDelivery, delivery }: Props) => {
   const [dropDownDate, setDropDownDate] = useState<Date | undefined>(
     new Date()
   );

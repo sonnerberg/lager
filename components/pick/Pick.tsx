@@ -1,11 +1,16 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Product from "../../interfaces/Product";
 
 import OrderList from "./OrderList";
 import PickList from "./PickList";
 
 const Stack = createNativeStackNavigator();
 
-const Pick = ({ setProducts }) => {
+interface Props {
+  setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+}
+
+const Pick = ({ setProducts }: Props) => {
   return (
     <Stack.Navigator initialRouteName="List">
       <Stack.Screen name="List" component={OrderList} />

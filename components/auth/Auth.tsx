@@ -5,12 +5,16 @@ import Register from "./Register";
 
 const Stack = createNativeStackNavigator();
 
-const Auth = (props) => {
+interface Props {
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<Boolean>>;
+}
+
+const Auth = ({ setIsLoggedIn }: Props) => {
   return (
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen name="Login">
         {(screenProps) => (
-          <Login {...screenProps} setIsLoggedIn={props.setIsLoggedIn} />
+          <Login {...screenProps} setIsLoggedIn={setIsLoggedIn} />
         )}
       </Stack.Screen>
       <Stack.Screen name="Register" component={Register} />

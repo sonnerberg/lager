@@ -8,7 +8,16 @@ import Product from "../../interfaces/Product";
 import ProductDropDown from "./ProductDropDown";
 import DateDropDown from "./DateDropDown";
 
-const DeliveryForm = ({ route, navigation }) => {
+interface Props {
+  route: {
+    key: string;
+    name: string;
+    params: { reload: Boolean };
+  };
+  navigation: { navigate: Function };
+}
+
+const DeliveryForm = ({ route, navigation }: Props) => {
   const [delivery, setDelivery] = useState<Partial<Delivery>>({
     delivery_date: new Date().toLocaleDateString("se"),
   });

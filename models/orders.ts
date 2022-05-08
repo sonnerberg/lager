@@ -10,7 +10,6 @@ const orders = {
     return result.data;
   },
   changeOrderToInvoiced: async (order: Partial<Order>) => {
-    console.log("the order", order);
     await fetch(`${base_url}/orders`, {
       method: "PUT",
       body: JSON.stringify({

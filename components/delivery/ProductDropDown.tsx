@@ -2,8 +2,19 @@ import { useEffect, useState } from "react";
 import productModel from "../../models/products";
 import { Picker } from "@react-native-picker/picker";
 import Product from "../../interfaces/Product";
+import Delivery from "../../interfaces/Delivery";
 
-const ProductDropDown = (props) => {
+interface Props {
+  delivery: Partial<Delivery>;
+  setDelivery: React.Dispatch<React.SetStateAction<Partial<Delivery>>>;
+  setCurrentProduct: React.Dispatch<React.SetStateAction<Partial<Product>>>;
+}
+
+const ProductDropDown = ({
+  delivery,
+  setDelivery,
+  setCurrentProduct,
+}: Props) => {
   const [products, setProducts] = useState<Product[]>([]);
   let productsHash: any = {};
 
@@ -22,10 +33,10 @@ const ProductDropDown = (props) => {
 
   return (
     <Picker
-      selectedValue={props.delivery?.product_id}
+      selectedValue={delivery?.product_id}
       onValueChange={(itemValue) => {
-        props.setDelivery({ ...props.delivery, product_id: itemValue });
-        props.setCurrentProduct(productsHash[itemValue]);
+        setDelivery({ ...delivery, product_id: itemValue });
+        setCurrentProduct(productsHash[itemValue]);
       }}
     >
       {itemsList}

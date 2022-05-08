@@ -3,7 +3,11 @@ import Auth from "../../interfaces/Auth";
 import AuthFields from "./AuthFields";
 import AuthModel from "../../models/auth";
 
-const Register = ({ navigation }) => {
+interface Props {
+  navigation: { navigate: Function };
+}
+
+const Register = ({ navigation }: Props) => {
   const [auth, setAuth] = useState<Partial<Auth>>({});
 
   const doRegister = async () => {

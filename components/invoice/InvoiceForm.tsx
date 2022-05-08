@@ -9,7 +9,16 @@ import DateSelectorCreationDate from "./DateSelectorCreationDate";
 import DateSelectorDueDate from "./DateSelectorDueDate";
 import invoicesModel from "../../models/invoices";
 
-const InvoiceForm = ({ route, navigation }) => {
+interface Props {
+  route: {
+    key: string;
+    name: string;
+    params: { reload: Boolean };
+  };
+  navigation: { navigate: Function };
+}
+
+const InvoiceForm = ({ route, navigation: { navigate } }: Props) => {
   const [invoice, setInvoice] = useState<Partial<Invoice>>({
     creation_date: new Date().toLocaleDateString("se"),
   });
@@ -36,10 +45,12 @@ const InvoiceForm = ({ route, navigation }) => {
     }
   };
 
-  useEffect(async () => {
-    const order = await fetchAnOrder(invoice?.order_id);
-    const totalPrice = calculateTotalPrice(order);
-    setTotalPrice(totalPrice);
+  useEffect(() => {
+    (async () => {
+      const order = await fetchAnOrder(invoice?.order_id);
+      const totalPrice = calculateTotalPrice(order);
+      setTotalPrice(totalPrice);
+    })();
   }, [invoice]);
 
   const addInvoice = async () => {
@@ -58,9 +69,8 @@ const InvoiceForm = ({ route, navigation }) => {
       await invoicesModel.addInvoice(updatedInvoice);
 
       const result = await ordersModel.changeOrderToInvoiced(updatedOrder);
-      console.log(result);
 
-      navigation.navigate("ListOfInvoices", { reload: true });
+      navigate("ListOfInvoices", { reload: true });
     } catch (error) {
       console.error("cannot create invoice", error);
     }

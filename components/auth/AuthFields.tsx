@@ -1,7 +1,21 @@
 import { View, Text, TextInput, Button } from "react-native";
+import Auth from "../../interfaces/Auth";
 import { Typography, Forms, Base } from "../../styles";
 
-const AuthFields = ({ auth, setAuth, title, submit, navigation }) => {
+interface Props {
+  auth: Partial<Auth>;
+  setAuth: React.Dispatch<React.SetStateAction<Partial<Auth>>>;
+  submit: Function;
+  title: string;
+  navigation: { navigate: Function };
+}
+const AuthFields = ({
+  auth,
+  setAuth,
+  title,
+  submit,
+  navigation: { navigate },
+}: Props) => {
   return (
     <View>
       <Text style={Typography.header2}>{title}</Text>
@@ -28,7 +42,7 @@ const AuthFields = ({ auth, setAuth, title, submit, navigation }) => {
         <Button
           title="Registrera i stället"
           onPress={() => {
-            navigation.navigate("Register");
+            navigate("Register");
           }}
         />
       )}
