@@ -12,7 +12,6 @@ interface Props {
 }
 
 const ShipOrder = ({ route }: Props) => {
-  //   console.log(route);
   const { order } = route.params || false;
   const [marker, setMarker] = useState<ReactElement>();
   const [userLocationMarker, setUserLocationMarker] = useState<ReactElement>();
