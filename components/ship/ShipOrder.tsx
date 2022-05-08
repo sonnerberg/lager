@@ -6,6 +6,7 @@ import Order from "../../interfaces/Order";
 import nominatim from "../../models/nominatim";
 import { Base, Typography } from "../../styles";
 import * as Location from "expo-location";
+import OrderItem from "../../interfaces/OrderItem";
 
 interface Props {
   route: { params: { order: Partial<Order> } };
@@ -92,6 +93,19 @@ const ShipOrder = ({ route }: Props) => {
           {userLocationMarker}
         </MapView>
       </View>
+      <Text>Order id: {order.id}</Text>
+      <Text>Namn: {order.name}</Text>
+      <Text>Adress: {order.address}</Text>
+      <Text>Postnummer: {order.zip}</Text>
+      <Text>Stad: {order.city}</Text>
+      <Text>Orderstatus: {order.status}</Text>
+      {order.order_items.map((item: OrderItem) => {
+        return (
+          <Text>
+            Vara: {item.name} Antal: {item.amount} Pris: {item.price}
+          </Text>
+        );
+      })}
     </View>
   );
 };
