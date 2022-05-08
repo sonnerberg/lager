@@ -15,6 +15,7 @@ import { Button } from "react-native-paper";
 import Invoices from "./components/invoice/Invoices";
 import ShipOrder from "./components/ship/ShipOrder";
 import Product from "./interfaces/Product";
+import Ship from "./components/ship/Ship";
 
 const Tab = createBottomTabNavigator();
 
@@ -87,7 +88,7 @@ export default function App() {
               {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
             </Tab.Screen>
           )}
-          <Tab.Screen name="Skicka order" component={ShipOrder} />
+          <Tab.Screen name="Skicka order" component={Ship} />
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaView>

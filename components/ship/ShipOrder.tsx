@@ -1,20 +1,27 @@
-import { useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { Text } from "react-native-paper";
+import Order from "../../interfaces/Order";
 import nominatim from "../../models/nominatim";
 import { Base, Typography } from "../../styles";
 
-const ShipOrder = () => {
+interface Props {
+  route: { params: { order: Partial<Order> } };
+}
+
+const ShipOrder = ({ route }: Props) => {
   //   console.log(route);
-  //   const { order } = route.params;
-  const [marker, setMarker] = useState<Element>();
+  const { order } = route.params || false;
+  const [marker, setMarker] = useState<ReactElement>();
+
+  let results;
 
   useEffect(() => {
     (async () => {
-      const results = await nominatim.getCoordinates({
-        street: "Stortorget",
-        city: "Karlskrona",
+      results = await nominatim.getCoordinates({
+        street: order.address,
+        city: order.city,
       });
 
       setMarker(
@@ -29,17 +36,6 @@ const ShipOrder = () => {
     })();
   }, []);
 
-  console.log(marker);
-
-  const myMarker = (
-    <Marker
-      coordinate={{ latitude: 56.17, longitude: 15.59 }}
-      title="Min markör"
-    />
-  );
-
-  console.log(myMarker);
-
   return (
     <View style={Base.base}>
       <Text style={Typography.header2}>Skicka order</Text>
@@ -53,7 +49,6 @@ const ShipOrder = () => {
             longitudeDelta: 0.1,
           }}
         >
-          {myMarker}
           {marker}
         </MapView>
       </View>

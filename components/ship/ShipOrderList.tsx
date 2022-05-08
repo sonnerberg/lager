@@ -12,7 +12,7 @@ interface Props {
   navigation: { navigate: Function };
 }
 
-const OrderList = ({ route, navigation: { navigate } }: Props) => {
+const ShipOrderList = ({ route, navigation: { navigate } }: Props) => {
   const { reload } = route.params || false;
   const [allOrders, setAllOrders] = useState<Order[]>([]);
 
@@ -21,7 +21,6 @@ const OrderList = ({ route, navigation: { navigate } }: Props) => {
   };
 
   if (reload) {
-    // TODO: Update orders in ship also
     console.log("reloading orders");
     fetchAllOrders();
     route.params.reload = false;
@@ -32,13 +31,13 @@ const OrderList = ({ route, navigation: { navigate } }: Props) => {
   }, []);
 
   const listOfOrders = allOrders
-    .filter((order: Order) => order.status_id === 100)
+    .filter((order: Order) => order.status_id >= 200)
     .map((order: Order) => (
       <Button
         title={order.name}
         key={order.id}
         onPress={() => {
-          navigate("Details", {
+          navigate("Map", {
             order,
           });
         }}
@@ -47,10 +46,10 @@ const OrderList = ({ route, navigation: { navigate } }: Props) => {
 
   return (
     <View>
-      <Text>Ordrar redo att plockas</Text>
+      <Text>Ordrar redo att skickas</Text>
       {listOfOrders}
     </View>
   );
 };
 
-export default OrderList;
+export default ShipOrderList;
