@@ -67,7 +67,6 @@ const ShipOrder = ({ route }: Props) => {
   let fitToMarkers = true;
 
   useEffect(() => {
-    console.log("fitting to supplied markers");
     if (map?.current && marker && userLocationMarker && fitToMarkers) {
       map.current.fitToSuppliedMarkers(["user", "receiver"], true);
       fitToMarkers = false;
