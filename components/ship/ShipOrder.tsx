@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { Text } from "react-native-paper";
@@ -15,8 +15,9 @@ const ShipOrder = ({ route }: Props) => {
   const { order } = route.params || false;
   const [marker, setMarker] = useState<ReactElement>();
   const [userLocationMarker, setUserLocationMarker] = useState<ReactElement>();
-  const [locationMarker, setLocationMarker] = useState(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const map = useRef(null);
 
   useEffect(() => {
     (async () => {
@@ -31,6 +32,7 @@ const ShipOrder = ({ route }: Props) => {
 
       setUserLocationMarker(
         <Marker
+          identifier="user"
           coordinate={{
             latitude: currentLocation.coords.latitude,
             longitude: currentLocation.coords.longitude,
@@ -51,6 +53,7 @@ const ShipOrder = ({ route }: Props) => {
 
       setMarker(
         <Marker
+          identifier="receiver"
           coordinate={{
             latitude: parseFloat(results[0].lat),
             longitude: parseFloat(results[0].lon),
@@ -60,6 +63,15 @@ const ShipOrder = ({ route }: Props) => {
       );
     })();
   }, []);
+  let fitToMarkers = true;
+
+  useEffect(() => {
+    console.log("fitting to supplied markers");
+    if (map?.current && marker && userLocationMarker && fitToMarkers) {
+      map.current.fitToSuppliedMarkers(["user", "receiver"], true);
+      fitToMarkers = false;
+    }
+  }, [userLocationMarker]);
 
   return (
     <View style={Base.base}>
@@ -67,10 +79,11 @@ const ShipOrder = ({ route }: Props) => {
       {errorMessage ? <Text>{errorMessage}</Text> : null}
       <View style={styles.container}>
         <MapView
+          ref={map}
           style={styles.map}
           initialRegion={{
-            latitude: 56.1612,
-            longitude: 15.5869,
+            latitude: 55.7612,
+            longitude: 13.5869,
             latitudeDelta: 0.1,
             longitudeDelta: 0.1,
           }}

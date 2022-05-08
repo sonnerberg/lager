@@ -1,4 +1,3 @@
-import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -13,7 +12,6 @@ import Deliveries from "./components/delivery/Deliveries";
 import Auth from "./components/auth/Auth";
 import { Button } from "react-native-paper";
 import Invoices from "./components/invoice/Invoices";
-import ShipOrder from "./components/ship/ShipOrder";
 import Product from "./interfaces/Product";
 import Ship from "./components/ship/Ship";
 
@@ -25,6 +23,7 @@ const routeIcons = {
   Inleveranser: "car",
   "Logga in": "person-circle",
   Faktura: "document-text",
+  "Skicka order": "map-sharp",
 };
 
 export default function App() {
