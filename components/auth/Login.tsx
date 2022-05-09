@@ -15,7 +15,7 @@ const Login = ({ navigation, setIsLoggedIn }: Props) => {
 
   const doLogin = async () => {
     if (auth.email && auth.password) {
-      const { message } = await AuthModel.login({
+      const message = await AuthModel.login({
         email: auth.email,
         password: auth.password,
       });
