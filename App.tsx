@@ -91,7 +91,7 @@ export default function App() {
           <Tab.Screen name="Skicka order" component={Ship} />
         </Tab.Navigator>
       </NavigationContainer>
-      <FlashMessage position={"top"} />
+      <FlashMessage position={"top"} style={{ paddingTop: 50 }} />
     </SafeAreaView>
   );
 }
