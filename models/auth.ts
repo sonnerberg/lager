@@ -3,6 +3,13 @@ import Auth from "../interfaces/Auth";
 
 import storage from "./storage";
 
+// TODO: Update FlashMessageInterface with all types
+interface FlashMessageInterface {
+  message: string;
+  description?: string;
+  type: "danger" | "success";
+}
+
 const auth = {
   getToken: async () => {
     const { token, date } = await storage.readToken();
@@ -51,9 +58,7 @@ const auth = {
       password: authFields.password,
     };
 
-    const {
-      data: { message },
-    } = await (
+    const result = await (
       await fetch(`${base_url}/auth/register`, {
         method: "POST",
         body: JSON.stringify(data),
@@ -61,7 +66,22 @@ const auth = {
       })
     ).json();
 
-    return message;
+    let flashMessage: FlashMessageInterface;
+
+    if (result.errors) {
+      flashMessage = {
+        message: result.errors.title,
+        description: result.errors.detail,
+        type: "danger",
+      };
+    } else {
+      flashMessage = {
+        message: result.data.message,
+        type: "success",
+      };
+    }
+
+    return flashMessage;
   },
   logout: async () => {
     await storage.deleteToken();

@@ -13,13 +13,15 @@ const Register = ({ navigation }: Props) => {
 
   const doRegister = async () => {
     if (auth.email && auth.password) {
-      const message = await AuthModel.register({
+      const flashMessage = await AuthModel.register({
         email: auth.email,
         password: auth.password,
       });
-      // TODO: Show message to user if successful / unsuccessful
-      showMessage({ message, type: "success" });
-      navigation.navigate("Login");
+      showMessage(flashMessage);
+      if (flashMessage.type === "success") {
+        // TODO: Send email and password to "Login"
+        navigation.navigate("Login");
+      }
     } else {
       showMessage({
         message: "Något saknas i formuläret",
