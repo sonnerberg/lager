@@ -3,27 +3,24 @@ import Auth from "../../interfaces/Auth";
 import AuthFields from "./AuthFields";
 import AuthModel from "../../models/auth";
 import { ParamListBase, RouteProp } from "@react-navigation/native";
+import { showMessage } from "react-native-flash-message";
 
 interface Props {
-  // route: {
-  //   key: string;
-  //   name: string;
-  //   params: { reload: Boolean };
-  // };
-  route: RouteProp<ParamListBase, "Login">;
   navigation: { navigate: Function };
   setIsLoggedIn: React.Dispatch<React.SetStateAction<Boolean>>;
 }
 
-const Login = ({ route, navigation, setIsLoggedIn }: Props) => {
+const Login = ({ navigation, setIsLoggedIn }: Props) => {
   const [auth, setAuth] = useState<Partial<Auth>>({});
 
   const doLogin = async () => {
     if (auth.email && auth.password) {
-      await AuthModel.login({
+      const { message } = await AuthModel.login({
         email: auth.email,
         password: auth.password,
       });
+
+      showMessage({ message, type: "success" });
 
       // TODO: Show message to user if successful / unsuccessful
       setIsLoggedIn(true);
