@@ -1,14 +1,8 @@
 import { api_key, base_url } from "../config/config.json";
 import Auth from "../interfaces/Auth";
+import FlashMessageInterface from "../interfaces/FlashMessageInterface";
 
 import storage from "./storage";
-
-// TODO: Update FlashMessageInterface with all types
-interface FlashMessageInterface {
-  message: string;
-  description?: string;
-  type: "danger" | "success";
-}
 
 const auth = {
   getToken: async () => {
@@ -37,9 +31,7 @@ const auth = {
       email: authFields.email,
       password: authFields.password,
     };
-    const {
-      data: { token, message },
-    } = await (
+    const result = await (
       await fetch(`${base_url}/auth/login`, {
         method: "POST",
         body: JSON.stringify(data),
@@ -47,9 +39,23 @@ const auth = {
       })
     ).json();
 
-    await storage.storeToken(token);
+    let flashMessage: FlashMessageInterface;
 
-    return message;
+    if (result.errors) {
+      flashMessage = {
+        message: result.errors.title,
+        description: result.errors.detail,
+        type: "danger",
+      };
+    } else {
+      await storage.storeToken(result.data.token);
+      flashMessage = {
+        message: result.data.message,
+        type: "success",
+      };
+    }
+
+    return flashMessage;
   },
   register: async (authFields: Auth) => {
     const data = {
