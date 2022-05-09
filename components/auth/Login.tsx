@@ -24,6 +24,12 @@ const Login = ({ navigation, setIsLoggedIn }: Props) => {
 
       // TODO: Show message to user if successful / unsuccessful
       setIsLoggedIn(true);
+    } else {
+      showMessage({
+        message: "Något saknas i formuläret",
+        description: "E-post eller lösenord saknas",
+        type: "warning",
+      });
     }
   };
   return (

@@ -51,7 +51,9 @@ const auth = {
       password: authFields.password,
     };
 
-    const result = await (
+    const {
+      data: { message },
+    } = await (
       await fetch(`${base_url}/auth/register`, {
         method: "POST",
         body: JSON.stringify(data),
@@ -59,7 +61,7 @@ const auth = {
       })
     ).json();
 
-    return result;
+    return message;
   },
   logout: async () => {
     await storage.deleteToken();
