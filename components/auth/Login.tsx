@@ -15,15 +15,16 @@ const Login = ({ navigation, setIsLoggedIn }: Props) => {
 
   const doLogin = async () => {
     if (auth.email && auth.password) {
-      const message = await AuthModel.login({
+      const flashMessage = await AuthModel.login({
         email: auth.email,
         password: auth.password,
       });
 
-      showMessage({ message, type: "success" });
+      showMessage(flashMessage);
 
-      // TODO: Show message to user if successful / unsuccessful
-      setIsLoggedIn(true);
+      if (flashMessage.type === "success") {
+        setIsLoggedIn(true);
+      }
     } else {
       showMessage({
         message: "Något saknas i formuläret",
