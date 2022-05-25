@@ -100,7 +100,7 @@ const ShipOrder = ({ route }: Props) => {
       <Text>Orderstatus: {order.status}</Text>
       {order.order_items.map((item: OrderItem) => {
         return (
-          <Text>
+          <Text key={item.product_id}>
             Vara: {item.name} Antal: {item.amount} Pris: {item.price}
           </Text>
         );
