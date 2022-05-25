@@ -5,22 +5,22 @@ import productsModel from "../../models/products";
 import { Typography } from "../../styles";
 
 const StockList = ({ products, setProducts }) => {
-  const fetchAllProducts = async () => {
-    setProducts(await productsModel.getProducts());
-  };
+    const fetchAllProducts = async () => {
+        setProducts(await productsModel.getProducts());
+    };
 
-  useEffect(() => {
-    fetchAllProducts();
-  }, []);
+    useEffect(() => {
+        fetchAllProducts();
+    }, []);
 
-  const productNames = products.map((product: Partial<Product>) => (
-    <Text key={product.id} style={Typography.padding}>
-      <Text style={Typography.boldText}>{product.name}, </Text>
-      <Text>antal i lager: {product.stock}</Text>
-    </Text>
-  ));
+    const productNames = products.map((product: Partial<Product>) => (
+        <Text key={product.id} style={Typography.padding}>
+            <Text style={Typography.boldText}>{product.name}, </Text>
+            <Text>antal i lager: {product.stock}</Text>
+        </Text>
+    ));
 
-  return <View>{productNames}</View>;
+    return <View>{productNames}</View>;
 };
 
 export default StockList;
