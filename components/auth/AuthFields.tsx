@@ -3,7 +3,7 @@ import Auth from "../../interfaces/Auth";
 import { Typography, Forms, Base } from "../../styles";
 import { HelperText, TextInput } from "react-native-paper";
 import { useEffect, useRef, useState } from "react";
-import { validate } from "@babel/types";
+import { Ionicons } from "@expo/vector-icons";
 
 interface Props {
     auth: Partial<Auth>;
@@ -21,6 +21,7 @@ const AuthFields = ({
 }: Props) => {
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [secure, setSecure] = useState(true);
 
     const validatePassword = (password: string | undefined) => {
         const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!\.-}]).{4,}$/;
@@ -81,14 +82,26 @@ const AuthFields = ({
                     setAuth({ ...auth, password });
                 }}
                 value={auth?.password}
-                secureTextEntry={true}
+                secureTextEntry={secure}
                 error={passwordError}
+            />
+            <Ionicons
+                name={secure ? "eye" : "eye-off"}
+                style={{
+                    display: "flex",
+                    alignSelf: "flex-end",
+                    marginEnd: 15,
+                }}
+                onPress={() => {
+                    setSecure(!secure);
+                }}
             />
             <HelperText type="error" visible={passwordError}>
                 Password has to be 4 characters and include at least one capital
                 letter, one lower case letter, a digit and an optional symbol
                 (!, ., -).
             </HelperText>
+
             <Button title={title} onPress={submit} />
             {title === "Logga in" && (
                 <Button
