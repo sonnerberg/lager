@@ -86,7 +86,8 @@ const AuthFields = ({
             />
             <HelperText type="error" visible={passwordError}>
                 Password has to be 4 characters and include at least one capital
-                letter, one lower case letter, a digit and a symbol (!, ., -).
+                letter, one lower case letter, a digit and an optional symbol
+                (!, ., -).
             </HelperText>
             <Button title={title} onPress={submit} />
             {title === "Logga in" && (
